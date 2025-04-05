@@ -9,6 +9,7 @@ const msDisplay = document.querySelector("#ms");
 let seconds = 0;
 let ms = 0;
 let Interval;
+let firstMove = true;
 
 let cardArray = [];
 let htmlCardArr = [];
@@ -16,6 +17,7 @@ let htmlCardArr = [];
 let flippedCount = 0;
 let flippedIndexes = [];
 let locked = false;
+let numberOfMatches = 0;
 
 function startTimer(){
     ms++;
@@ -36,7 +38,6 @@ function startTimer(){
         secondsDisplay.textContent = seconds;
     }
 }
-Interval = setInterval(startTimer, 10);
 
 musicButton.addEventListener("click",(e)=>{
     
@@ -106,6 +107,12 @@ function Card(value, index){
     this.el.classList.add("card", "card-background");
     this.el.addEventListener("click", ()=>{
         if(locked == false){
+            if(firstMove){
+                Interval = setInterval(startTimer, 10);
+                firstMove = false;
+            }
+
+
             console.log(`Pressed Card has a value of ${this.value} at index ${this.index}`);
             this.el.textContent = this.value;
             this.el.classList.remove("card-background");
@@ -122,7 +129,10 @@ function Card(value, index){
                 cardTwo = htmlCardArr[flippedIndexes[1]];
 
                 let match = compareCards(flippedIndexes[0], flippedIndexes[1]);
-
+                numberOfMatches += match;
+                if(numberOfMatches == 5){
+                    clearInterval(Interval);
+                }
                 setTimeout(()=>{
                     cardOne.el.textContent = "";
                     cardOne.el.classList.add("card-background");
