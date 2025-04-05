@@ -6,10 +6,13 @@ const cardContainer = document.querySelector(".card-container");
 
 const secondsDisplay = document.querySelector("#seconds");
 const msDisplay = document.querySelector("#ms");
+const bestTimeDisplay = document.querySelector(".best-time");
+
 let seconds = 0;
 let ms = 0;
 let Interval;
 let firstMove = true;
+let bestTime = Number.MAX_VALUE;
 
 let cardArray = [];
 let htmlCardArr = [];
@@ -108,6 +111,8 @@ function Card(value, index){
     this.el.addEventListener("click", ()=>{
         if(locked == false){
             if(firstMove){
+                secondsDisplay.textContent = "00";
+                msDisplay.textContent = "00";
                 Interval = setInterval(startTimer, 10);
                 firstMove = false;
             }
@@ -132,6 +137,13 @@ function Card(value, index){
                 numberOfMatches += match;
                 if(numberOfMatches == 5){
                     clearInterval(Interval);
+                    setTimeout(()=>{newGame()}, 600);
+                    let currentTime = Number(seconds + ms);
+
+                    if(currentTime < bestTime){
+                        bestTimeDisplay.textContent = "BEST TIME: " + seconds + ":" + ms;
+                        bestTime = currentTime;
+                    }
                 }
                 setTimeout(()=>{
                     cardOne.el.textContent = "";
@@ -155,6 +167,21 @@ function Card(value, index){
         }
     })
     
+}
+
+function newGame(){
+    shuffle(cardArray);
+    console.log(`New Game: ${cardArray}`);
+    for(let i = 0; i < 10; i++){
+        htmlCardArr[i].value = cardArray[i];
+        htmlCardArr[i].index = i;
+        htmlCardArr[i].el.style.visibility = "visible";
+    }
+    numberOfMatches = 0;
+    firstMove = true;
+    seconds = 0;
+    ms = 0;
+    clearInterval(Interval);
 }
 
 function displayCards(){
