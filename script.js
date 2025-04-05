@@ -2,6 +2,7 @@ let musicOn = true;
 const musicButton = document.querySelector(".music");
 const icon = musicButton.querySelector("i");
 const backgroundNoise = document.querySelector("#backgroundNoise");
+const cardContainer = document.querySelector(".card-container");
 
 musicButton.addEventListener("click",(e)=>{
     
@@ -18,3 +19,19 @@ musicButton.addEventListener("click",(e)=>{
 
     musicOn = !musicOn;
 });
+
+function Card(value){
+    this.value = value;
+
+}
+
+function displayCards(){
+    for(let i = 0; i < 10; i++){
+        let tmp = document.createElement("div");
+        tmp.classList.add("card");
+        tmp.textContent = i;
+        cardContainer.appendChild(tmp);
+    }
+}
+
+displayCards();
