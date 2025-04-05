@@ -28,3 +28,10 @@ body{
     border-radius: 5px;
 }
 
+.card-background{
+    background-image: url(images/card-back-side.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+

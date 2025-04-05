@@ -58,11 +58,12 @@ function Card(value, index){
 
     this.el = document.createElement("div");
     this.el.textContent ="";
-    this.el.classList.add("card");
-
+    this.el.classList.add("card", "card-background");
     this.el.addEventListener("click", ()=>{
         console.log(`Pressed Card has a value of ${this.value} at index ${this.index}`);
         this.el.textContent = this.value;
+        this.el.classList.remove("card-background");
+
         flippedIndexes[flippedCount] = this.index;
         flippedCount++;
         if (flippedCount == 2){
@@ -71,7 +72,11 @@ function Card(value, index){
             
             setTimeout(()=>{
                 htmlCardArr[flippedIndexes[0]].el.textContent = "";
-                htmlCardArr[flippedIndexes[1]].el.textContent = "";}, 600);
+                htmlCardArr[flippedIndexes[0]].el.classList.add("card-background");
+
+                htmlCardArr[flippedIndexes[1]].el.textContent = "";
+                htmlCardArr[flippedIndexes[1]].el.classList.add("card-background");}, 600);
+                
             
         }
     })
