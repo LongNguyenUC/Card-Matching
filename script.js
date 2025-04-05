@@ -3,12 +3,40 @@ const musicButton = document.querySelector(".music");
 const icon = musicButton.querySelector("i");
 const backgroundNoise = document.querySelector("#backgroundNoise");
 const cardContainer = document.querySelector(".card-container");
+
+const secondsDisplay = document.querySelector("#seconds");
+const msDisplay = document.querySelector("#ms");
+let seconds = 0;
+let ms = 0;
+let Interval;
+
 let cardArray = [];
 let htmlCardArr = [];
 
 let flippedCount = 0;
 let flippedIndexes = [];
 let locked = false;
+
+function startTimer(){
+    ms++;
+    if(ms <= 9){
+        msDisplay.textContent = "0" + ms;
+    }
+    if(ms > 9){
+        msDisplay.textContent = ms;
+    }
+    if(ms > 99){
+        seconds++;
+        secondsDisplay.textContent = "0" + seconds;
+        ms = 0;
+        msDisplay.textContent = "0" + 0;
+    }
+
+    if(seconds > 9){
+        secondsDisplay.textContent = seconds;
+    }
+}
+Interval = setInterval(startTimer, 10);
 
 musicButton.addEventListener("click",(e)=>{
     
