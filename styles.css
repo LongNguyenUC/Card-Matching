@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    border: 1px solid red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body{
@@ -10,22 +10,41 @@ body{
     padding: 20px 50px;
 }
 
+.top-header{
+    display: flex;
+    align-items: center;
+    height: 75px;
+    padding: 0px 20px;
+    justify-content: space-between;
+    border: 1px red solid;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.timer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
 .card-container{
     height: calc(100vh - 15vh);
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 10px;
-    border: 10px black solid;
-    background-color: black;
+    border: 10px lavender solid;
+    background-color: lavender;
 }
 
 .card{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
-    border-radius: 5px;
+    background-color: #e6e6e6;
+    border-radius: 15px;
 }
 
 .card-background{
