@@ -8,6 +8,7 @@ let htmlCardArr = [];
 
 let flippedCount = 0;
 let flippedIndexes = [];
+let locked = false;
 
 musicButton.addEventListener("click",(e)=>{
     
@@ -52,6 +53,22 @@ function createCards(){
     console.log(cardArray);
 }
 
+function compareCards(cardOneIndex, cardTwoIndex){
+    let one = htmlCardArr[cardOneIndex];
+    let two = htmlCardArr[cardTwoIndex];
+
+    console.log(one);
+    console.log(two);
+    if (one.value === two.value){
+        console.log("match!");
+        return true;
+    }
+    else{
+        console.log("different!");
+        return false;
+    }
+}
+
 function Card(value, index){
     this.value = value;
     this.index = index;
@@ -60,24 +77,43 @@ function Card(value, index){
     this.el.textContent ="";
     this.el.classList.add("card", "card-background");
     this.el.addEventListener("click", ()=>{
-        console.log(`Pressed Card has a value of ${this.value} at index ${this.index}`);
-        this.el.textContent = this.value;
-        this.el.classList.remove("card-background");
+        if(locked == false){
+            console.log(`Pressed Card has a value of ${this.value} at index ${this.index}`);
+            this.el.textContent = this.value;
+            this.el.classList.remove("card-background");
+        
+            this.el.style.pointerEvents = "none";
 
-        flippedIndexes[flippedCount] = this.index;
-        flippedCount++;
-        if (flippedCount == 2){
-            flippedCount = 0;
-            console.log("Two cards have been flipped");
-            
-            setTimeout(()=>{
-                htmlCardArr[flippedIndexes[0]].el.textContent = "";
-                htmlCardArr[flippedIndexes[0]].el.classList.add("card-background");
+            flippedIndexes[flippedCount] = this.index;
+            flippedCount++;
+            if (flippedCount == 2){
+                locked = true;
+                cardContainer.style.pointerEvents = "none";
+                console.log("Two cards have been flipped");
+                cardOne = htmlCardArr[flippedIndexes[0]];
+                cardTwo = htmlCardArr[flippedIndexes[1]];
 
-                htmlCardArr[flippedIndexes[1]].el.textContent = "";
-                htmlCardArr[flippedIndexes[1]].el.classList.add("card-background");}, 600);
+                let match = compareCards(flippedIndexes[0], flippedIndexes[1]);
+
+                setTimeout(()=>{
+                    cardOne.el.textContent = "";
+                    cardOne.el.classList.add("card-background");
+                    cardOne.el.style.pointerEvents = "auto";
+
+                    cardTwo.el.textContent = "";
+                    cardTwo.el.classList.add("card-background");
+                    cardTwo.el.style.pointerEvents = "auto";
+
+                    if (match){
+                        cardOne.el.style.visibility = "hidden";
+                        cardTwo.el.style.visibility = "hidden";
+                    }
+
+                    
+                    }, 500);  
+                setTimeout(()=>{cardContainer.style.pointerEvents = "auto";flippedCount = 0;locked = false;}, 520)
                 
-            
+            }
         }
     })
     
