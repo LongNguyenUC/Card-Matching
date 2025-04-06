@@ -1,7 +1,7 @@
 let musicOn = true;
 const musicButton = document.querySelector(".music");
 const music = document.querySelector("audio");
-music.volume = 0.01;
+music.volume = 0.05;
 
 const icon = musicButton.querySelector("i");
 const backgroundNoise = document.querySelector("#backgroundNoise");

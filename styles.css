@@ -82,3 +82,7 @@ body{
     font-weight: bold;
     border-radius: 15px;
 }
+
+#replayButton:hover{
+    border: 5px solid #4a3f35;
+}
