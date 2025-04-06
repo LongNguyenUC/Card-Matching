@@ -1,5 +1,8 @@
 let musicOn = true;
 const musicButton = document.querySelector(".music");
+const music = document.querySelector("audio");
+music.volume = 0.01;
+
 const icon = musicButton.querySelector("i");
 const backgroundNoise = document.querySelector("#backgroundNoise");
 const cardContainer = document.querySelector(".card-container");
@@ -25,6 +28,12 @@ let flippedCount = 0;
 let flippedIndexes = [];
 let locked = false;
 let numberOfMatches = 0;
+
+const cardFlipX = new Audio("audio/cardFlip2.ogg");
+const cardFlipY = new Audio("audio/cardFlip2.ogg");
+let soundArr = [];
+soundArr[0] = cardFlipX;
+soundArr[1] = cardFlipY;
 
 function startTimer(){
     ms++;
@@ -114,6 +123,8 @@ function Card(value, index){
     this.el.classList.add("card", "card-background");
     this.el.addEventListener("click", ()=>{
         if(locked == false){
+            soundArr[flippedCount].play();
+
             if(firstMove){
                 secondsDisplay.textContent = "00";
                 msDisplay.textContent = "00";
