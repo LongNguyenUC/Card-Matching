@@ -7,6 +7,10 @@ const cardContainer = document.querySelector(".card-container");
 const secondsDisplay = document.querySelector("#seconds");
 const msDisplay = document.querySelector("#ms");
 const bestTimeDisplay = document.querySelector(".best-time");
+const replayButton = document.querySelector("#replayButton");
+
+replayButton.style.display = "none";
+replayButton.addEventListener("click", newGame);
 
 let seconds = 0;
 let ms = 0;
@@ -137,7 +141,8 @@ function Card(value, index){
                 numberOfMatches += match;
                 if(numberOfMatches == 5){
                     clearInterval(Interval);
-                    setTimeout(()=>{newGame()}, 600);
+                    setTimeout(()=>{replayButton.style.display = "block";}, 600);
+                    
                     let currentTime = Number(seconds + ms);
 
                     if(currentTime < bestTime){
@@ -182,6 +187,7 @@ function newGame(){
     seconds = 0;
     ms = 0;
     clearInterval(Interval);
+    replayButton.style.display = "none";
 }
 
 function displayCards(){
