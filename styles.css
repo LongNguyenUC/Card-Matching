@@ -8,6 +8,7 @@
 body{
     height: 100vh;
     padding: 20px 50px;
+    background-image: url(images/table-top.avif);
 }
 
 .top-header{
@@ -16,9 +17,13 @@ body{
     height: 75px;
     padding: 0px 20px;
     justify-content: space-between;
-    border: 1px red solid;
     font-size: 1.5rem;
     position: relative;
+    background-color: 	#e1c18f;
+    color: #2e2e2e;
+    font-weight: bold;
+    border-radius: 10px;
+    opacity: 90%;
 }
 
 .timer{
@@ -35,16 +40,25 @@ body{
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 10px;
-    border: 10px lavender solid;
-    background-color: lavender;
+    border: 10px transparent solid;
+    
 }
 
 .card{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e6e6e6;
     border-radius: 15px;
+    font-size: 100px;
+
+    background-color: #f8f4e3;
+    background-image: 
+        repeating-linear-gradient(45deg, transparent 0px, transparent 1px, rgba(0,0,0,0.02) 1px, rgba(0,0,0,0.02) 2px),
+        repeating-linear-gradient(-45deg, transparent 0px, transparent 1px, rgba(0,0,0,0.02) 1px, rgba(0,0,0,0.02) 2px);
+    background-blend-mode: multiply;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2); 
+
 }
 
 .card-background{
@@ -52,5 +66,6 @@ body{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: white;
 }
 
